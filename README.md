@@ -1,0 +1,1 @@
+Calculator web application developed in the Project One course.
