@@ -22,6 +22,10 @@ keyboard.addEventListener('click', (event) => {
                 firstNum += char;
             };
         } else if (target.className === 'operator') {
+            if (firstNum && operator && secondNum) {
+                display.value = operate(firstNum, operator, secondNum);
+            };
+
             operator = char;
         };
 
@@ -31,10 +35,9 @@ keyboard.addEventListener('click', (event) => {
     if (target.textContent === 'C') {
         clearDisplay();
     } else if (target.textContent === '=') {
-        display.value = operate(firstNum, operator, secondNum);
-        firstNum = display.value;
-        secondNum = '';
-        operator = null;
+        if (firstNum, operator, secondNum) {
+            display.value = operate(firstNum, operator, secondNum);
+        };
     };
 });
 
@@ -47,15 +50,25 @@ function addToDisplay(char) {
 
 function clearDisplay() {
     display.value = '';
+    firstNum = '';
+    secondNum = '';
+    operator = null;
+};
+
+function defaultVars() {
+    firstNum = result;
+    secondNum = '';
+    operator = null;
 };
 
 // Calculation
-function operate(a, operator, b) {
+function operate(a, op, b) {
+    console.table([a, op, b]);
     let num1 = Number(a);
     let num2 = Number(b);
     let result = 0;
 
-    switch (operator) {
+    switch (op) {
         case '+':
             result = num1 + num2;
             break;
@@ -69,6 +82,10 @@ function operate(a, operator, b) {
             result = num1 / num2;
             break;
     };
-    
+
+    firstNum = result;
+    secondNum = '';
+    operator = null;
+
     return result;
 };
