@@ -2,39 +2,42 @@
 const keyboard = document.querySelector('#keyboard');
 const display = document.querySelector("#display");
 
-// Variables
+// Operands and operator
 let firstNum = '';
 let secondNum = '';
 let operator = null;
 
-
 // Event handling
 keyboard.addEventListener('click', (event) => {
     let target = event.target;
+    let char = target.textContent;
 
-    if (target.tagName === 'BUTTON') {
-        let char = target.textContent;
-
-        if (target.className === 'digit') {
-            if (operator !== null) {
-                secondNum  += char;
-            } else {
-                firstNum += char;
-            };
-        } else if (target.className === 'operator') {
-            if (firstNum && operator && secondNum) {
-                display.value = operate(firstNum, operator, secondNum);
-            };
-
-            operator = char;
+    // Enter operands
+    if (target.className === 'digit') {
+        // Insert digits to operands.
+        if (!operator) {
+            firstNum += char;
+        } else {
+            secondNum += char;
         };
 
-        addToDisplay(char);
+        insertDigit(char);
+    
+    // Enter operator
+    } else if (target.className === 'operator') {
+        if (firstNum, operator, secondNum) {
+            display.value = operate(firstNum, operator, secondNum);
+        };
+
+        operator = char;
+        insertOperator(char);
     };
 
     if (target.textContent === 'C') {
         clearDisplay();
-    } else if (target.textContent === '=') {
+    };
+
+    if (target.textContent === '=') {
         if (firstNum, operator, secondNum) {
             display.value = operate(firstNum, operator, secondNum);
         };
@@ -44,8 +47,14 @@ keyboard.addEventListener('click', (event) => {
 
 // Functions
 
-function addToDisplay(char) {
+function insertDigit(char) {
     display.value += char;
+};
+
+function insertOperator(char) {
+    if (display.value.slice(-1) !== char) {
+        display.value += char;
+    };
 };
 
 function clearDisplay() {
@@ -63,7 +72,6 @@ function defaultVars() {
 
 // Calculation
 function operate(a, op, b) {
-    console.table([a, op, b]);
     let num1 = Number(a);
     let num2 = Number(b);
     let result = 0;
