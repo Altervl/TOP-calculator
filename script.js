@@ -1,6 +1,7 @@
 // Elements
 const keyboard = document.querySelector('#keyboard');
 const display = document.querySelector("#display");
+display.value = '0';
 
 // Operands and operator
 let firstNum = '';
@@ -14,14 +15,22 @@ keyboard.addEventListener('click', (event) => {
 
     // Enter operands
     if (target.className === 'digit') {
-        // Insert digits to operands.
-        if (!operator) {
-            firstNum += char;
-        } else {
-            secondNum += char;
+        if (display.value === '0') {
+            display.value = '';
+        }
+
+        // User can enter up to 18 characters.
+        if (display.value.length < 18) {
+            // Insert digits to operands.
+            if (!operator) {
+                firstNum += char;
+            } else {
+                secondNum += char;
+            };
+
+            insertDigit(char);
         };
 
-        insertDigit(char);
     
     // Enter operator
     } else if (target.className === 'operator') {
@@ -58,7 +67,7 @@ function insertOperator(char) {
 };
 
 function clearDisplay() {
-    display.value = '';
+    display.value = '0';
     firstNum = '';
     secondNum = '';
     operator = null;
@@ -95,6 +104,5 @@ function operate(a, op, b) {
     secondNum = '';
     operator = null;
 
-    // return Math.round(result * 1000) / 1000;
-    return result.toFixed(3);
+    return Math.round(result * 1000) / 1000;
 };
