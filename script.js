@@ -23,12 +23,20 @@ keyboard.addEventListener('click', (event) => {
         if (display.value.length < 18) {
             // Insert digits to operands.
             if (!operator) {
-                firstNum += char;
+                if (char === '.' && firstNum.includes('.')) {
+                    // pass
+                } else {
+                    firstNum += char;
+                    insertDigit(char);
+                };
             } else {
-                secondNum += char;
+                if (char === '.' && secondNum.includes('.')) {
+                    // pass
+                } else {
+                    secondNum += char;
+                    insertDigit(char);
+                };
             };
-
-            insertDigit(char);
         };
 
     
