@@ -59,3 +59,7 @@ button:hover {
     color: #7be127e1;
     background-color: #343434;
 }
+
+#equal {
+    flex: 1 1 75%;
+}

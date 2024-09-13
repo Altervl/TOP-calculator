@@ -1,10 +1,11 @@
 // Elements
 const keyboard = document.querySelector('#keyboard');
+const del = document.querySelector('#delete');
 const display = document.querySelector("#display");
 display.value = '0';
 
 // Operands and operator
-let firstNum = '';
+let firstNum = '0';
 let secondNum = '';
 let operator = null;
 
@@ -48,12 +49,33 @@ keyboard.addEventListener('click', (event) => {
 
         operator = char;
         insertOperator(char);
+    } else if (target.id === 'delete') {
+        if (!operator) {
+            if (firstNum === '') {
+                firstNum = '0';
+            }
+            firstNum = firstNum.slice(0, -1);
+        } else {
+            if (secondNum === '') {
+                operator = null;
+            };
+
+            secondNum = secondNum.slice(0, -1);
+        };
+
+        deleteChar();
+
+        if (display.value === '') {
+            display.value = '0';
+        };
     };
 
+    // Clear display
     if (target.textContent === 'C') {
         clearDisplay();
     };
 
+    // Calculate
     if (target.textContent === '=') {
         if (firstNum, operator, secondNum) {
             display.value = operate(firstNum, operator, secondNum);
@@ -74,9 +96,13 @@ function insertOperator(char) {
     };
 };
 
+function deleteChar() {
+    display.value = display.value.slice(0, -1);
+};
+
 function clearDisplay() {
     display.value = '0';
-    firstNum = '';
+    firstNum = '0'
     secondNum = '';
     operator = null;
 };
