@@ -108,9 +108,16 @@ function operate(a, op, b) {
             break;
     };
 
-    firstNum = result;
-    secondNum = '';
-    operator = null;
+    console.log(result);
 
-    return Math.round(result * 1000) / 1000;
+    if (result === Infinity && num2 === 0) {
+        return "zero division error";
+    } else if (isNaN(result)) {
+        return "not a number error";
+    } else {
+        firstNum = result;
+        secondNum = '';
+        operator = null;
+        return Math.round(result * 1000) / 1000;
+    };
 };
