@@ -95,5 +95,6 @@ function operate(a, op, b) {
     secondNum = '';
     operator = null;
 
-    return result;
+    // return Math.round(result * 1000) / 1000;
+    return result.toFixed(3);
 };
