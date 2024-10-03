@@ -1,2 +1,2 @@
-Calculator web application developed in the Project One course.
+Calculator web application developed in the Odin Project course.
 Live demo: https://altervl.github.io/TOP-calculator/
